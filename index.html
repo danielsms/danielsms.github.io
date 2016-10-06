@@ -19,12 +19,17 @@
 			text-align:center;
 			line-height:64px;
 			text-shadow:1px 1px 1px #000;
+			opacity:0;
+		}
+		.show{
+			transition: all .25s ease-in-out;
+			opacity:1!important;
 		}
 	</style>
 </head>
 <body>
 <div class="container"></div>
-<div id="primavera" style="display:none">Primavera<br/>H2020 project</div>
+<div id="primavera">Primavera<br/>H2020 project</div>
 <script type="text/javascript">
 	var width = 512,
 		height = 512,
@@ -80,7 +85,7 @@
 			}
 		}
 		setTimeout(function(){
-			document.getElementById('primavera').style.display = 'block';
+			document.getElementById('primavera').classList.add('show');
 		},delay*(2+pixels.length));
 	}
 </script>
