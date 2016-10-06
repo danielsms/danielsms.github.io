@@ -62,7 +62,7 @@
 				.attr("height",0)
 				.attr("width",0);
 		pixels.transition()
-				.delay(function(d){return delay+delay*Math.random();})
+				.delay(function(d){return delay+delay*(d.x/width+d.y/width);})
 				.attr("x",function(d){return d.x})
 				.attr("y",function(d){return d.y})
 				.attr("height",function(d){return d.h;})
