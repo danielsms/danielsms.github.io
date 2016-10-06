@@ -50,7 +50,7 @@
 					return d.w;
 				});
 	}
-	function drawAnim(pixels,id,delay){
+	function drawAnim(pixels,id,delay,center){
 		var pixelGroup = svg.append("g").attr("id","pixels"+id);
 		pixels = pixelGroup.selectAll(".pixel")
 			.data(pixels)
@@ -62,7 +62,7 @@
 				.attr("height",0)
 				.attr("width",0);
 		pixels.transition()
-				.delay(function(d){return delay+delay*(d.x/width+d.y/width);})
+				.delay(function(d){return delay+delay*(Math.sqrt((d.x-center.x)*(d.x-center.x)+(d.y-center.y)*(d.y-center.y)))/width;})
 				.attr("x",function(d){return d.x})
 				.attr("y",function(d){return d.y})
 				.attr("height",function(d){return d.h;})
@@ -70,12 +70,13 @@
 			.duration(250);
 	}
 	window.onload = function(){
-			var delay = 500;
+		var delay = 500;
+		var center = {x:1.5*width/4,y:0.4*height/2};
 		for(var i=0;i<pixels.length;i++){
 			if(i==0){
 				draw(pixels[i],i);
 			}else{
-				drawAnim(pixels[i],i,delay+(i-1)*delay);
+				drawAnim(pixels[i],i,delay+(i-1)*delay,center);
 			}
 		}
 		setTimeout(function(){
